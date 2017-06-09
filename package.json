@@ -1,0 +1,39 @@
+{
+  "name": "jekyll-dev",
+  "version": "0.0.1",
+  "description": "Developing gem-based jekyll theme with livereload.",
+  "bin": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "ts-node src/index.ts --port=4000 --jekyll-site=sample/jekyll-site",
+    "lint": "tslint src/**/*.ts",
+    "build": "tsc",
+    "postinstall": "npm run build"
+  },
+  "dependencies": {
+    "commander": "^2.9.0",
+    "gulp": "^3.9.1",
+    "gulp-server-livereload": "^1.9.2",
+    "js-yaml": "^3.8.4"
+  },
+  "devDependencies": {
+    "@types/node": "^7.0.29",
+    "ts-node": "^3.0.6",
+    "tslint": "^5.4.3",
+    "typescript": "^2.3.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arzyu/jekyll-dev.git"
+  },
+  "author": "Yazheng Yu <arzyu@live.cn> (https://github.com/arzyu)",
+  "homepage": "https://github.com/arzyu/jekyll-dev",
+  "keywords": [
+    "jekyll",
+    "jekyll-theme",
+    "livereload"
+  ],
+  "license": "MIT"
+}
