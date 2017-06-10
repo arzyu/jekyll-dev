@@ -1,6 +1,6 @@
 {
   "name": "jekyll-dev",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Developing gem-based jekyll theme with livereload.",
   "bin": "dist/index.js",
   "files": [
