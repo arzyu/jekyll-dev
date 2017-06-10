@@ -2,6 +2,7 @@ import * as child_process from 'child_process';
 import * as fs from 'fs';
 import * as path from 'path';
 
+import * as chalk from 'chalk';
 import * as gulp from 'gulp';
 import * as server from 'gulp-server-livereload';
 import * as yaml from 'js-yaml';
@@ -22,12 +23,16 @@ export default function run(options: {jekyllPath: string, port: string}) {
       const jekyllConfig: object = yaml.safeLoad(configYaml);
       const themeName = (jekyllConfig as any).theme;
       const themePath = child_process.execSync(
-        `bundle show ${themeName} 2>/dev/null`,
+        `bundle show ${themeName}`,
         { cwd: jekyllPath, encoding: 'utf8' }
       );
       return themePath.trim();
     } catch (error) {
-      console.log(error);
+      // catch error from `bundle show ...`
+      if (error.stdout) {
+        console.log(chalk.red(error.stdout));
+      }
+      throw(error);
     }
   }
 
@@ -45,7 +50,7 @@ export default function run(options: {jekyllPath: string, port: string}) {
         '..'
       );
       const relativePath = path.relative(parentPath, event.path);
-      console.log(`\n[jekyll-dev] ${relativePath}, ${event.type}\n`);
+      console.log(chalk.blue(`\n[jekyll-dev] ${relativePath}, ${event.type}\n`));
       buildJekyll();
     });
   });
@@ -62,7 +67,7 @@ export default function run(options: {jekyllPath: string, port: string}) {
 
   gulp.task('default', ['watch', 'server']);
 
-  console.log(`\n[jekyll-dev]:\n    site => ${jekyllPath}\n   theme => ${themePath}\n`);
+  console.log(chalk.blue(`\n[jekyll-dev]:\n    site => ${jekyllPath}\n   theme => ${themePath}\n`));
 
   gulp.start();
 }
