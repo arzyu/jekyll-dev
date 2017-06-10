@@ -10,7 +10,7 @@
     "dev": "ts-node src/index.ts --port=4000 --jekyll-site=sample/jekyll-site",
     "lint": "tslint src/**/*.ts",
     "build": "tsc",
-    "postinstall": "npm run build"
+    "prepublish": "npm run lint && npm run build"
   },
   "dependencies": {
     "chalk": "^1.1.3",
