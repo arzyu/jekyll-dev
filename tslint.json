@@ -2,6 +2,7 @@
   "extends": ["tslint:latest"],
   "rules": {
     "no-console": false,
+    "no-unused-variable": [true, "check-parameters"],
     "quotemark": [true, "single", "jsx-double", "avoid-escape", "avoid-template"],
     "trailing-comma": [true, {"multiline": "never", "singleline": "never"}]
   }
