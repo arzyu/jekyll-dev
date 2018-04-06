@@ -7,8 +7,8 @@ import * as gulp from 'gulp';
 import * as server from 'gulp-server-livereload';
 import * as yaml from 'js-yaml';
 
-export default function run(options: {jekyllPath: string, port: string}) {
-  const { jekyllPath, port } = options;
+export default function run(options: {jekyllPath: string, port: string, livereload: boolean}) {
+  const { jekyllPath, port, livereload } = options;
 
   function buildJekyll(): void {
     const cmd = 'bundle exec jekyll build --incremental && echo';
@@ -57,7 +57,7 @@ export default function run(options: {jekyllPath: string, port: string}) {
 
   gulp.task('server', ['build'], () => {
     gulp.src(`${jekyllPath}/_site`)
-      .pipe(server({ livereload: true, port }));
+      .pipe(server({ livereload, port }));
   });
 
   gulp.task('build', (done) => {
